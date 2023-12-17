@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/menuItems"
+    android:id="@+id/fragments">
+
+    <fragment
+        android:id="@+id/menuItems"
+        android:name="hr.gregl.goldenhourphotography.fragment.ItemsFragment"
+        android:label="@string/items"
+        />
+
+    <fragment
+        android:id="@+id/menuAbout"
+        android:name="hr.gregl.goldenhourphotography.fragment.AboutFragment"
+        android:label="@string/about"
+        />
+
+</navigation>

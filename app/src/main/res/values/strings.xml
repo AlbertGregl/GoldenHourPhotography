@@ -1,4 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Golden Hour Photography</string>
     <string name="please_wait">Please Wait…</string>
+    <string name="no_internet">No internet…</string>
+    <string name="this_is_golden_hour_photography">This Is Golden Hour Photography</string>
+    <string name="hello">Hello</string>
+    <string name="about">About</string>
+    <string name="items">Items</string>
+    <string name="exit">Exit</string>
+    <string name="really_exit_the_application">Really exit the application?</string>
+    <string name="cancel">Cancel</string>
 </resources>

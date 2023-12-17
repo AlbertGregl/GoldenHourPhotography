@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Golden and Sepia tones for the theme -->
+    <color name="golden">#FFD700</color>
+    <color name="sepia">#704214</color>
+    <color name="dark_golden">#B8860B</color>
+    <color name="light_sepia">#F4EAD5</color>
+    <color name="background">#52534b</color>
 </resources>
