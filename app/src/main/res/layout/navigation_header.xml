@@ -3,7 +3,6 @@
     android:layout_width="150dp"
     android:layout_height="100dp"
     android:src="@drawable/logo"
-    android:background="@color/background"
     android:layout_marginTop="@dimen/_20dp">
 
 </ImageView>

@@ -9,7 +9,7 @@ import hr.gregl.goldenhourphotography.framework.startActivity
 class TimeReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
-        //context.setBooleanPreference(DATA_IMPORTED)
+        context.setBooleanPreference(DATA_IMPORTED)
         context.startActivity<HostActivity>()
 
     }
