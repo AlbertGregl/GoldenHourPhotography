@@ -5,5 +5,5 @@ data class Item(
     val explanation: String,
     val picturePath: String,
     val date: String,
-    val read: Boolean
+    var read: Boolean
 )

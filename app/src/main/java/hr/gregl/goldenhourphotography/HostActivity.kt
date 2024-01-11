@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import hr.gregl.goldenhourphotography.databinding.ActivityHostBinding
 
+@Suppress("DEPRECATION")
 class HostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHostBinding
     override fun onCreate(savedInstanceState: Bundle?) {

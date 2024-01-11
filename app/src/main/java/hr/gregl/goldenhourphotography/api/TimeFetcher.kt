@@ -1,10 +1,12 @@
 package hr.gregl.goldenhourphotography.api
 
+import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.TimeReceiver
 import hr.gregl.goldenhourphotography.framework.sendBroadcast
-import hr.gregl.goldenhourphotography.handler.downloadImageAndStore
+import hr.gregl.goldenhourphotography.handler.downloadAndStore
 import hr.gregl.goldenhourphotography.model.Item
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,13 +31,14 @@ class TimeFetcher(private val context: Context) {
 
     fun fetchItems(count: Int) {
 
-        val request = timeApi.fetchItem(count = 10)
+        val request = timeApi.fetchItems(count = 10)
+
         request.enqueue(object : Callback<List<TimeItem>> {
             override fun onResponse(
                 call: Call<List<TimeItem>>,
                 response: Response<List<TimeItem>>
             ) {
-                response.body().let { populateItem(it) }
+                response.body()?.let { populateItems(it) }
             }
 
             override fun onFailure(call: Call<List<TimeItem>>, t: Throwable) {
@@ -44,29 +47,28 @@ class TimeFetcher(private val context: Context) {
 
         })
 
-
     }
 
-    private fun populateItem(timeItems: List<TimeItem>?) {
-        // foreground
-        val items = mutableListOf<Item>()
+    private fun populateItems(timeItems: List<TimeItem>) {
+        // FOREGROUND - do not go to internet!!!
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
-            timeItems?.forEach {
-                val picturePath = downloadImageAndStore(context, it.url)
-                items.add(
-                    Item(
-                        null,
-                        it.title,
-                        it.explanation,
-                        picturePath ?: "",
-                        it.date,
-                        false
-                    )
-                )
+            //BACKROUND
+            timeItems.forEach {
+                val picturePath = downloadAndStore(context, it.url)
+
+                val values = ContentValues().apply {
+                    put(Item::title.name, it.title)
+                    put(Item::explanation.name, it.explanation)
+                    put(Item::picturePath.name, picturePath ?: "")
+                    put(Item::date.name, it.date)
+                    put(Item::read.name, false)
+                }
+
+                context.contentResolver.insert(TIME_PROVIDER_CONTENT_URI, values)
+
             }
+            context.sendBroadcast<TimeReceiver>()
         }
-        println(items)
-        context.sendBroadcast<TimeReceiver>()
     }
 }

@@ -2,8 +2,6 @@ package hr.gregl.goldenhourphotography
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -60,4 +58,5 @@ class SplashScreenActivity : AppCompatActivity() {
             }
         }
     }
+
 }

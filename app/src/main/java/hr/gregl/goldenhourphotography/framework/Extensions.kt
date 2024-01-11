@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package hr.gregl.goldenhourphotography.framework
 
 import android.app.Activity
@@ -18,8 +20,7 @@ fun View.applyAnimation(animationId: Int) =
     startAnimation(AnimationUtils.loadAnimation(context, animationId))
 
 inline fun <reified T : Activity> Context.startActivity() =
-    startActivity(
-        Intent(this, T::class.java)
+    startActivity(Intent(this, T::class.java)
         .apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })

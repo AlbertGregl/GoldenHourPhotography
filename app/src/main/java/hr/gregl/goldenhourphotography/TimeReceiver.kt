@@ -7,8 +7,9 @@ import hr.gregl.goldenhourphotography.framework.setBooleanPreference
 import hr.gregl.goldenhourphotography.framework.startActivity
 
 class TimeReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
 
+    override fun onReceive(context: Context, intent: Intent) {
+        //FOREGROUND
         context.setBooleanPreference(DATA_IMPORTED)
         context.startActivity<HostActivity>()
 

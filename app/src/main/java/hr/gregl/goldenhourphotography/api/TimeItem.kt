@@ -2,6 +2,7 @@ package hr.gregl.goldenhourphotography.api
 
 import com.google.gson.annotations.SerializedName
 data class TimeItem(
+    @SerializedName("copyright") val copyright : String,
     @SerializedName("date") val date : String,
     @SerializedName("explanation") val explanation : String,
     @SerializedName("hdurl") val hdurl : String,
