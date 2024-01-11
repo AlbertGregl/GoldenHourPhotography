@@ -9,4 +9,5 @@
     <string name="exit">Exit</string>
     <string name="really_exit_the_application">Really exit the application?</string>
     <string name="cancel">Cancel</string>
+    <string name="picture_of_a_day">Picture of a Day</string>
 </resources>

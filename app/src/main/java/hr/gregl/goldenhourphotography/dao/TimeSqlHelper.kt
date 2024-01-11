@@ -5,8 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.net.Uri
-import androidx.core.content.contentValuesOf
 import hr.gregl.goldenhourphotography.model.Item
 
 private const val DB_NAME = "items.db"

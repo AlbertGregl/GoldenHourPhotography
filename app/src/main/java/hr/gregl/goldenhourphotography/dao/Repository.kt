@@ -5,7 +5,6 @@ import android.database.Cursor
 
 interface Repository {
     fun delete(selection: String?, selectionArgs: Array<String>?): Int
-
     fun insert(values: ContentValues?): Long
     fun query(
         projection: Array<String>?, selection: String?,

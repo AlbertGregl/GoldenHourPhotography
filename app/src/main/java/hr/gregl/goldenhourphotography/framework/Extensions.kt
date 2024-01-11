@@ -2,6 +2,7 @@
 
 package hr.gregl.goldenhourphotography.framework
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -10,10 +11,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Handler
 import android.os.Looper
-import android.preference.PreferenceManager
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.getSystemService
+import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
+import hr.gregl.goldenhourphotography.model.Item
 
 
 fun View.applyAnimation(animationId: Int) =
@@ -29,13 +31,13 @@ inline fun <reified T : BroadcastReceiver> Context.sendBroadcast() =
     sendBroadcast(Intent(this, T::class.java))
 
 fun Context.setBooleanPreference(key: String, value: Boolean = true)
-        = PreferenceManager.getDefaultSharedPreferences(this)
+        = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
     .edit()
     .putBoolean(key, value)
     .apply()
 
 fun Context.getBooleanPreference(key: String)
-        = PreferenceManager.getDefaultSharedPreferences(this)
+        = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
     .getBoolean(key, false)
 
 fun callDelayed(delay: Long, work: () -> Unit) {
@@ -54,4 +56,27 @@ fun Context.isOnline() : Boolean {
         }
     }
     return false
+}
+
+@SuppressLint("Range")
+fun Context.fetchItems() : MutableList<Item> {
+    val items = mutableListOf<Item>()
+
+    val cursor = contentResolver.query(
+        TIME_PROVIDER_CONTENT_URI, null, null, null, null
+    )
+    while (cursor != null && cursor.moveToNext()){
+        items.add(
+            Item(
+            cursor.getLong(cursor.getColumnIndexOrThrow(Item::_id.name)),
+            cursor.getString(cursor.getColumnIndexOrThrow(Item::title.name)),
+            cursor.getString(cursor.getColumnIndexOrThrow(Item::explanation.name)),
+            cursor.getString(cursor.getColumnIndexOrThrow(Item::picturePath.name)),
+            cursor.getString(cursor.getColumnIndexOrThrow(Item::date.name)),
+            cursor.getInt(cursor.getColumnIndexOrThrow(Item::read.name))==1
+        )
+        )
+    }
+
+    return items
 }
