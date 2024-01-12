@@ -10,4 +10,7 @@
     <string name="really_exit_the_application">Really exit the application?</string>
     <string name="cancel">Cancel</string>
     <string name="picture_of_a_day">Picture of a Day</string>
+    <string name="longitude_hint">Longitude</string>
+    <string name="latitude_hint">Latitude</string>
+    <string name="get_sunrise">Get Sunrise</string>
 </resources>

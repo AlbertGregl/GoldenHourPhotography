@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardUseCompatPadding="true"
@@ -11,24 +9,56 @@
 
     <LinearLayout
         android:padding="@dimen/_10dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivItem"
-            tools:src="@drawable/about"
-            android:layout_width="@dimen/_50dp"
-            android:layout_height="@dimen/_50dp" />
+
+        <EditText
+            android:id="@+id/etLatitude"
+            android:hint="@string/latitude_hint"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20dp" />
+
+        <EditText
+            android:id="@+id/etLongitude"
+            android:hint="@string/longitude_hint"
+            android:inputType="numberDecimal"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10dp" />
+
+        <Button
+            android:id="@+id/btnGetSunrise"
+            android:text="@string/get_sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_20dp" />
 
         <TextView
+            android:id="@+id/tvSunrise"
             android:textColor="?colorOnPrimary"
-            android:id="@+id/tvTitle"
-            tools:text="Picture of the day"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
+            android:textSize="@dimen/_18sp"
+            android:layout_marginTop="@dimen/_10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20dp" />
+
+        <TextView
+            android:id="@+id/tvSunset"
+            android:textColor="?colorOnPrimary"
+            android:textSize="@dimen/_18sp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20dp" />
+
+
 
     </LinearLayout>
 

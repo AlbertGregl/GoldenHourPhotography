@@ -10,15 +10,22 @@ import hr.gregl.goldenhourphotography.model.Item
 private const val DB_NAME = "items.db"
 private const val DB_VERSION = 1
 private const val TABLE_NAME = "items"
-private val CREATE_TABLE = "create table $TABLE_NAME( " +
-        "${Item::_id.name} integer primary key autoincrement, " +
-        "${Item::title.name} text not null, " +
-        "${Item::explanation.name} text not null, " +
-        "${Item::picturePath.name} text not null, " +
-        "${Item::date.name} text not null, " +
-        "${Item::read.name} integer not null" +
+private val CREATE_TABLE = "CREATE TABLE $TABLE_NAME (\n" +
+        "${Item::_id.name} INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+        "${Item::date.name} TEXT NOT NULL,\n" +
+        "${Item::sunrise.name} TEXT NOT NULL,\n" +
+        "${Item::sunset.name} TEXT NOT NULL,\n" +
+        "${Item::firstLight.name} TEXT NOT NULL,\n" +
+        "${Item::lastLight.name} TEXT NOT NULL,\n" +
+        "${Item::dawn.name} TEXT NOT NULL,\n" +
+        "${Item::dusk.name} TEXT NOT NULL,\n" +
+        "${Item::solarNoon.name} TEXT NOT NULL,\n" +
+        "${Item::goldenHour.name} TEXT NOT NULL,\n" +
+        "${Item::dayLength.name} TEXT NOT NULL,\n" +
+        "${Item::timezone.name} TEXT NOT NULL,\n" +
+        "${Item::utcOffset.name} INTEGER NOT NULL\n" +
         ")"
-private const val DROP_TABLE = "drop table $TABLE_NAME"
+private const val DROP_TABLE = "DROP TABLE IF EXISTS $TABLE_NAME"
 
 class TimeSqlHelper(context: Context?) : SQLiteOpenHelper(
     context, DB_NAME, null, DB_VERSION

@@ -21,15 +21,14 @@ class ItemAdapter(
     private val items: MutableList<Item>
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
-        private val tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
+        private val tvSunrise = itemView.findViewById<TextView>(R.id.tvSunrise)
+        private val tvSunset = itemView.findViewById<TextView>(R.id.tvSunset)
+        // TODO Additional TextViews for other data...
+
         fun bind(item: Item) {
-            tvTitle.text = item.title
-            Picasso.get()
-                .load(File(item.picturePath))
-                .error(R.drawable.about)
-                .transform(RoundedCornersTransformation(50, 5))
-                .into(ivItem)
+            tvSunrise.text = "Sunrise: ${item.sunrise}"
+            tvSunset.text = "Sunset: ${item.sunset}"
+            // TODO Bind other TextViews...
         }
     }
 
@@ -45,23 +44,13 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnLongClickListener {
-            //delete
-            val item = items[position]
-            context.contentResolver.delete(
-                ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, item._id!!),
-                null, null
-            )
-            File(item.picturePath).delete()
-            items.removeAt(position)
-            notifyDataSetChanged()
-
+            // TODO Define what happens on long click
             true
         }
 
         holder.itemView.setOnClickListener {
-            // edit
+            // TODO Define what happens on click
         }
-
 
         holder.bind(items[position])
     }
