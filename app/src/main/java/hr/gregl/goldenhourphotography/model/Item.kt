@@ -1,9 +1,16 @@
 package hr.gregl.goldenhourphotography.model
 data class Item(
     var _id: Long?,
-    val title: String,
-    val explanation: String,
-    val picturePath: String,
     val date: String,
-    var read: Boolean
+    val sunrise: String,
+    val sunset: String,
+    val firstLight: String,
+    val lastLight: String,
+    val dawn: String,
+    val dusk: String,
+    val solarNoon: String,
+    val goldenHour: String,
+    val dayLength: String,
+    val timezone: String,
+    val utcOffset: Int
 )

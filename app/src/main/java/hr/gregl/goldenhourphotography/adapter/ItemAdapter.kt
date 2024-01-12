@@ -21,15 +21,26 @@ class ItemAdapter(
     private val items: MutableList<Item>
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
-        private val tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
+        private val tvDate = itemView.findViewById<TextView>(R.id.tvDate)
+        private  val tvTimeZone = itemView.findViewById<TextView>(R.id.tvTimeZone)
+        private val tvSunrise = itemView.findViewById<TextView>(R.id.tvSunrise)
+        private val tvSunset = itemView.findViewById<TextView>(R.id.tvSunset)
+        private val tvFirstLight = itemView.findViewById<TextView>(R.id.tvFirstLight)
+        private val tvLastLight = itemView.findViewById<TextView>(R.id.tvLastLight)
+        private val tvDawn = itemView.findViewById<TextView>(R.id.tvDawn)
+        private val tvDusk = itemView.findViewById<TextView>(R.id.tvDusk)
+        private val tvGoldenHour = itemView.findViewById<TextView>(R.id.tvGoldenHour)
+
         fun bind(item: Item) {
-            tvTitle.text = item.title
-            Picasso.get()
-                .load(File(item.picturePath))
-                .error(R.drawable.about)
-                .transform(RoundedCornersTransformation(50, 5))
-                .into(ivItem)
+            tvDate.text = "Date: ${item.date}"
+            tvTimeZone.text = "Time zone: ${item.timezone.substringAfter("/")}"
+            tvSunrise.text = "Sunrise: ${item.sunrise}"
+            tvSunset.text = "Sunset: ${item.sunset}"
+            tvFirstLight.text = "First light: ${item.firstLight}"
+            tvLastLight.text = "Last light: ${item.lastLight}"
+            tvDawn.text = "Dawn: ${item.dawn}"
+            tvDusk.text = "Dusk: ${item.dusk}"
+            tvGoldenHour.text = "Golden hour: ${item.goldenHour}"
         }
     }
 
@@ -45,23 +56,13 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnLongClickListener {
-            //delete
-            val item = items[position]
-            context.contentResolver.delete(
-                ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, item._id!!),
-                null, null
-            )
-            File(item.picturePath).delete()
-            items.removeAt(position)
-            notifyDataSetChanged()
-
+            // TODO Define what happens on long click
             true
         }
 
         holder.itemView.setOnClickListener {
-            // edit
+            // TODO Define what happens on click
         }
-
 
         holder.bind(items[position])
     }

@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package hr.gregl.goldenhourphotography.framework
 
 import android.annotation.SuppressLint
@@ -68,15 +66,23 @@ fun Context.fetchItems() : MutableList<Item> {
     while (cursor != null && cursor.moveToNext()){
         items.add(
             Item(
-            cursor.getLong(cursor.getColumnIndexOrThrow(Item::_id.name)),
-            cursor.getString(cursor.getColumnIndexOrThrow(Item::title.name)),
-            cursor.getString(cursor.getColumnIndexOrThrow(Item::explanation.name)),
-            cursor.getString(cursor.getColumnIndexOrThrow(Item::picturePath.name)),
-            cursor.getString(cursor.getColumnIndexOrThrow(Item::date.name)),
-            cursor.getInt(cursor.getColumnIndexOrThrow(Item::read.name))==1
-        )
+                _id = cursor.getLong(cursor.getColumnIndexOrThrow(Item::_id.name)),
+                date = cursor.getString(cursor.getColumnIndexOrThrow(Item::date.name)),
+                sunrise = cursor.getString(cursor.getColumnIndexOrThrow(Item::sunrise.name)),
+                sunset = cursor.getString(cursor.getColumnIndexOrThrow(Item::sunset.name)),
+                firstLight = cursor.getString(cursor.getColumnIndexOrThrow(Item::firstLight.name)),
+                lastLight = cursor.getString(cursor.getColumnIndexOrThrow(Item::lastLight.name)),
+                dawn = cursor.getString(cursor.getColumnIndexOrThrow(Item::dawn.name)),
+                dusk = cursor.getString(cursor.getColumnIndexOrThrow(Item::dusk.name)),
+                solarNoon = cursor.getString(cursor.getColumnIndexOrThrow(Item::solarNoon.name)),
+                goldenHour = cursor.getString(cursor.getColumnIndexOrThrow(Item::goldenHour.name)),
+                dayLength = cursor.getString(cursor.getColumnIndexOrThrow(Item::dayLength.name)),
+                timezone = cursor.getString(cursor.getColumnIndexOrThrow(Item::timezone.name)),
+                utcOffset = cursor.getInt(cursor.getColumnIndexOrThrow(Item::utcOffset.name))
+            )
         )
     }
-
+    // TODO memory management
+    //cursor?.close()
     return items
 }

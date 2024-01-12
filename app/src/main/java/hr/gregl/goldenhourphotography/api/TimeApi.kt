@@ -4,10 +4,12 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val API_URL = "https://api.nasa.gov/planetary/"
+const val API_URL = "https://api.sunrisesunset.io/"
 
 interface TimeApi {
-    @GET("apod?api_key=DEMO_KEY")
-    fun fetchItems(@Query("count") count: Int = 10)
-            : Call<List<TimeItem>>
+    @GET("json")
+    fun fetchItems(
+        @Query("lat") latitude: Double,
+        @Query("lng") longitude: Double
+    ): Call<ApiResponse>
 }

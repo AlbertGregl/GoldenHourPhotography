@@ -10,7 +10,7 @@ class TimeWorker(
 ) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
-        TimeFetcher(context).fetchItems(10)
+        TimeFetcher(context).fetchItems(45.815399, 15.966568)
         return Result.success()
     }
 
