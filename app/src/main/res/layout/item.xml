@@ -1,104 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="?colorPrimary"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/_9dp"
-    app:cardUseCompatPadding="true">
+    app:cardBackgroundColor="?colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:padding="@dimen/_10dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
+        <ImageView
+            android:id="@+id/ivItem"
+            tools:src="@drawable/about"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="@dimen/_50dp" />
 
         <TextView
-            android:id="@+id/tvDate"
             android:textColor="?colorOnPrimary"
+            android:id="@+id/tvTitle"
+            tools:text="Picture of the day"
             android:textSize="@dimen/_24sp"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/_20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvTimeZone"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvSunrise"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvSunset"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvFirstLight"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvLastLight"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvDawn"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvDusk"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvGoldenHour"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
