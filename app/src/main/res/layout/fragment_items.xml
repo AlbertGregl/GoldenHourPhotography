@@ -5,10 +5,36 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".fragment.ItemsFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvItems"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etLatitude"
+            android:layout_width="@dimen/_220dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/latitude_hint"
+            android:inputType="numberDecimal|numberSigned"/>
+
+        <EditText
+            android:id="@+id/etLongitude"
+            android:layout_width="@dimen/_220dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/longitude_hint"
+            android:inputType="numberDecimal|numberSigned"/>
+
+        <Button
+            android:id="@+id/btnGetSunrise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/get_sunrise"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 </FrameLayout>

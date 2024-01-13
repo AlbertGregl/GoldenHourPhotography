@@ -14,33 +14,7 @@
         android:padding="@dimen/_10dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etLatitude"
-            android:layout_width="@dimen/_220dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/latitude_hint"
-            android:inputType="numberDecimal|numberSigned"
-            app:layout_constraintEnd_toStartOf="@+id/etLongitude"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etLongitude"
-            android:layout_width="@dimen/_220dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/longitude_hint"
-            android:inputType="numberDecimal|numberSigned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/etLatitude"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnGetSunrise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/get_sunrise"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etLatitude" />
 
         <TextView
             android:id="@+id/tvDate"

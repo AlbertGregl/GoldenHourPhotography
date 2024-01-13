@@ -56,7 +56,17 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnLongClickListener {
-            // TODO Define what happens on long click
+            // remove item from database
+            val item = items[position]
+            val uri =
+                item._id?.let { it1 -> ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, it1) }
+            if (uri != null) {
+                context.contentResolver.delete(uri, null, null)
+
+            }
+            // remove item from list
+            items.removeAt(position)
+            notifyItemRemoved(position)
             true
         }
 
