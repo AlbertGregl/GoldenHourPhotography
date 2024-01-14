@@ -1,11 +1,13 @@
 package hr.gregl.goldenhourphotography.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.gregl.goldenhourphotography.R
@@ -16,20 +18,28 @@ import hr.gregl.goldenhourphotography.model.Item
 class ItemAdapter(
     private val context: Context,
     private val items: MutableList<Item>
-) : RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+
+    private var detailsVisibilityMap = mutableMapOf<Long, Boolean>()
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvDate = itemView.findViewById<TextView>(R.id.tvDate)
-        private  val tvTimeZone = itemView.findViewById<TextView>(R.id.tvTimeZone)
+        private val tvGoldenHour = itemView.findViewById<TextView>(R.id.tvGoldenHour)
+        private val additionalDetailsLayout = itemView.findViewById<LinearLayout>(R.id.additionalDetailsLayout)
+        private val tvTimeZone = itemView.findViewById<TextView>(R.id.tvTimeZone)
         private val tvSunrise = itemView.findViewById<TextView>(R.id.tvSunrise)
         private val tvSunset = itemView.findViewById<TextView>(R.id.tvSunset)
         private val tvFirstLight = itemView.findViewById<TextView>(R.id.tvFirstLight)
         private val tvLastLight = itemView.findViewById<TextView>(R.id.tvLastLight)
         private val tvDawn = itemView.findViewById<TextView>(R.id.tvDawn)
         private val tvDusk = itemView.findViewById<TextView>(R.id.tvDusk)
-        private val tvGoldenHour = itemView.findViewById<TextView>(R.id.tvGoldenHour)
 
-        fun bind(item: Item) {
+
+        @SuppressLint("SetTextI18n")
+        fun bind(item: Item, isDetailsVisible: Boolean) {
             tvDate.text = "Date: ${item.date}"
+            tvGoldenHour.text = "Golden hour: ${item.goldenHour}"
+            additionalDetailsLayout.visibility = if (isDetailsVisible) View.VISIBLE else View.GONE
             tvTimeZone.text = "Time zone: ${item.timezone.substringAfter("/")}"
             tvSunrise.text = "Sunrise: ${item.sunrise}"
             tvSunset.text = "Sunset: ${item.sunset}"
@@ -37,38 +47,46 @@ class ItemAdapter(
             tvLastLight.text = "Last light: ${item.lastLight}"
             tvDawn.text = "Dawn: ${item.dawn}"
             tvDusk.text = "Dusk: ${item.dusk}"
-            tvGoldenHour.text = "Golden hour: ${item.goldenHour}"
+
+            itemView.setOnClickListener {
+                additionalDetailsLayout.visibility = if (additionalDetailsLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+            }
+        }
+
+        fun isDetailsVisible(): Boolean {
+            return additionalDetailsLayout.visibility == View.VISIBLE
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(context)
-                .inflate(R.layout.item, parent, false)
-        )
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item, parent, false))
     }
+
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = items[position]
+        // Get the current visibility state for this item, defaulting to false
+        val isDetailsVisible = detailsVisibilityMap[item._id] ?: false
 
         holder.itemView.setOnLongClickListener {
-            val item = items[position]
-            val uri =
-                item._id?.let { it1 -> ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, it1) }
-            if (uri != null) {
-                context.contentResolver.delete(uri, null, null)
-
-            }
+            // Remove item from database and list on long click
+            val uri = item._id?.let { ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, it) }
+            uri?.let { context.contentResolver.delete(it, null, null) }
             items.removeAt(position)
             notifyItemRemoved(position)
             true
         }
 
-        holder.itemView.setOnClickListener {
-            // TODO Define what happens on click
-        }
+        holder.bind(item, isDetailsVisible)
+    }
 
-        holder.bind(items[position])
+    override fun onViewDetachedFromWindow(holder: ViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        val item = items.getOrNull(holder.adapterPosition)
+        item?._id?.let {
+            detailsVisibilityMap[it] = holder.isDetailsVisible()
+        }
     }
 }

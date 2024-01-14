@@ -26,69 +26,6 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/tvTimeZone"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvSunrise"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvSunset"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvFirstLight"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvLastLight"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvDawn"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/tvDusk"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
             android:id="@+id/tvGoldenHour"
             android:textColor="?colorOnPrimary"
             android:textSize="@dimen/_24sp"
@@ -98,6 +35,78 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <!-- additional details layout -->
+        <LinearLayout
+            android:id="@+id/additionalDetailsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvTimeZone"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvSunrise"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvSunset"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvFirstLight"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvLastLight"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvDawn"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvDusk"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

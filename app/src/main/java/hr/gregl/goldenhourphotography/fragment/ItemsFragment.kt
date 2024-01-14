@@ -22,7 +22,7 @@ class ItemsFragment : Fragment() {
     private lateinit var items: MutableList<Item>
     private lateinit var binding: FragmentItemsBinding
     private lateinit var itemAdapter: ItemAdapter
-    val dateHandler = DateHandler()
+    private val dateHandler = DateHandler()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +70,7 @@ class ItemsFragment : Fragment() {
     private fun refreshItems() {
         items.clear()
         items.addAll(requireContext().fetchItems())
-        items.sortByDescending { it.utcOffset }
+        items.sortByDescending { it._id }
         itemAdapter.notifyDataSetChanged()
     }
 
