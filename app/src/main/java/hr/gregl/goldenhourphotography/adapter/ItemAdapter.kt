@@ -6,15 +6,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import hr.gregl.goldenhourphotography.R
 import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.model.Item
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
-import java.io.File
+
 
 class ItemAdapter(
     private val context: Context,
@@ -56,7 +53,6 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnLongClickListener {
-            // remove item from database
             val item = items[position]
             val uri =
                 item._id?.let { it1 -> ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, it1) }
@@ -64,7 +60,6 @@ class ItemAdapter(
                 context.contentResolver.delete(uri, null, null)
 
             }
-            // remove item from list
             items.removeAt(position)
             notifyItemRemoved(position)
             true

@@ -39,12 +39,12 @@ class TimeSqlHelper(context: Context?) : SQLiteOpenHelper(
         onCreate(db)
     }
 
-    override fun delete(selection: String?, selectionArgs: Array<String>?)
-            = writableDatabase.delete(
-        TABLE_NAME,
-        selection,
-        selectionArgs
-    )
+    override fun delete(selection: String?, selectionArgs: Array<String>?) =
+        writableDatabase.delete(
+            TABLE_NAME,
+            selection,
+            selectionArgs
+        )
 
     override fun insert(values: ContentValues?) =
         writableDatabase.insert(
