@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.adapter.ItemAdapter
 import hr.gregl.goldenhourphotography.api.TimeFetcher
 import hr.gregl.goldenhourphotography.databinding.FragmentItemsBinding
@@ -57,9 +58,9 @@ class ItemsFragment : Fragment() {
     }
 
     private fun fetchAndDisplayItems(latitude: Double, longitude: Double) {
+        clearOldData()
 
         val (startDate, endDate) = dateHandler.getStartAndEndDates()
-
         TimeFetcher(requireContext()).fetchItems(latitude, longitude, startDate, endDate)
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -67,10 +68,13 @@ class ItemsFragment : Fragment() {
         }, 1000)
     }
 
-    private fun refreshItems() {
+    private fun clearOldData() {
+        requireContext().contentResolver.delete(TIME_PROVIDER_CONTENT_URI, null, null)
         items.clear()
+    }
+
+    private fun refreshItems() {
         items.addAll(requireContext().fetchItems())
-        items.sortByDescending { it._id }
         itemAdapter.notifyDataSetChanged()
     }
 
