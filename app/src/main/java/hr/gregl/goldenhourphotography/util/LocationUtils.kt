@@ -60,7 +60,7 @@ object LocationUtils {
         when (requestCode) {
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
-                    logCurrentLocation(activity)
+                    getCurrentLocation(activity)
                 } else {
                     Log.d("Location", "Permission denied")
                 }
@@ -69,14 +69,16 @@ object LocationUtils {
         }
     }
 
-    private fun logCurrentLocation(context: Context) {
+    private fun getCurrentLocation(context: Context) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             == android.content.pm.PackageManager.PERMISSION_GRANTED) {
             val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
             val locationListener = object : LocationListener {
                 override fun onLocationChanged(location: Location) {
+                    // TODO: Remove this log
                     Log.d("Location", "Latitude: ${location.latitude}, Longitude: ${location.longitude}")
+                    LocationData.updateLocation(location.latitude, location.longitude)
                     locationManager.removeUpdates(this)
                 }
 

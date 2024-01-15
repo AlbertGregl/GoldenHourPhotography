@@ -50,9 +50,8 @@ class SplashScreenActivity : AppCompatActivity() {
             proceedWithAppFlow()
         } else {
             Toast.makeText(this, "Location permission denied. Using default location.", Toast.LENGTH_SHORT).show()
-            //isLocationSetupComplete = true
-            //proceedWithAppFlow()
-            finish()
+            isLocationSetupComplete = true
+            proceedWithAppFlow()
         }
     }
 

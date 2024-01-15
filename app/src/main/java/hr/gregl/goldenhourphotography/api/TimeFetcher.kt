@@ -78,47 +78,4 @@ class TimeFetcher(private val context: Context) {
         }
     }
 
-/*    fun fetchItem(latitude: Double, longitude: Double) {
-        val request = timeApi.fetchItems(latitude, longitude)
-
-        request.enqueue(object : Callback<ApiResponse> {
-            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { apiResponse ->
-                        populateItem(apiResponse.results)
-                    }
-                } else {
-                    Log.e("TimeFetcher", "Response not successful: ${response.errorBody()?.string()}")
-                }
-            }
-
-            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                Log.e("TimeFetcher", "API call failed", t)
-            }
-        })
-    }
-
-
-    private fun populateItem(timeItem: TimeItem) {
-        val scope = CoroutineScope(Dispatchers.IO)
-        scope.launch {
-            val values = ContentValues().apply {
-                put(Item::date.name, timeItem.date)
-                put(Item::sunrise.name, timeItem.sunrise)
-                put(Item::sunset.name, timeItem.sunset)
-                put(Item::firstLight.name, timeItem.firstLight)
-                put(Item::lastLight.name, timeItem.lastLight)
-                put(Item::dawn.name, timeItem.dawn)
-                put(Item::dusk.name, timeItem.dusk)
-                put(Item::solarNoon.name, timeItem.solarNoon)
-                put(Item::goldenHour.name, timeItem.goldenHour)
-                put(Item::dayLength.name, timeItem.dayLength)
-                put(Item::timezone.name, timeItem.timezone)
-                put(Item::utcOffset.name, timeItem.utcOffset)
-            }
-            context.contentResolver.insert(TIME_PROVIDER_CONTENT_URI, values)
-            context.sendBroadcast<TimeReceiver>()
-        }
-    }*/
-
 }
