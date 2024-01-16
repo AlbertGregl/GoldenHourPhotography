@@ -2,7 +2,25 @@
     <string name="app_name">Golden Hour Photography</string>
     <string name="please_wait">Please Wait…</string>
     <string name="no_internet">No internet…</string>
-    <string name="this_is_golden_hour_photography">This Is Golden Hour Photography</string>
+    <string name="this_is_golden_hour_photography">
+        The "Golden Hour Photography" app is an Android application developed using Kotlin.
+        <br />
+        It utilizes data from the <a href="https://sunrisesunset.io/api/">SunriseSunset.io API</a>
+        to provide users with information about golden hour times, which are ideal for photography,
+        based on their geographical location.
+        <br />
+        This project is an integral part of the Android platform curriculum at the
+        <a href="https://www.algebra.hr/visoko-uciliste/en/studij/undergraduate-professional-program/software-engineering/lecture-plan/application-development-for-mobile-devices/4723">
+            Algebra University
+        </a>, emphasizing the use of activities, services, intent receivers,
+        and content providers.
+        <br />
+        It serves as a practical demonstration of my programming skills in both Java and Kotlin.
+        <br />
+        Project link on GitHub: <a href="https://github.com/AlbertGregl/GoldenHourPhotography">
+            GoldenHourPhotography
+        </a>
+    </string>
     <string name="hello">Hello</string>
     <string name="about">About</string>
     <string name="items">Items</string>
@@ -13,4 +31,9 @@
     <string name="longitude_hint">Longitude</string>
     <string name="latitude_hint">Latitude</string>
     <string name="get_sunrise">Get Sunrise</string>
+    <string name="author">Albert Gregl</string>
+    <string name="current_location">Current Location</string>
+    <string name="about_image">About Image</string>
+    <string name="api_sunrisesunset"><a href="https://sunrisesunset.io/api/">SunriseSunset.io</a></string>
+    <string name="api_link">API link:</string>
 </resources>

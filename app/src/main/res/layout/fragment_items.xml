@@ -5,35 +5,71 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".fragment.ItemsFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etLatitude"
-            android:layout_width="@dimen/_220dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/latitude_hint"
-            android:inputType="numberDecimal|numberSigned"/>
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etLongitude"
-            android:layout_width="@dimen/_220dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/longitude_hint"
-            android:inputType="numberDecimal|numberSigned"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    style="@style/SplashScreenTheme"
+                    android:id="@+id/etLatitude"
+                    android:layout_width="@dimen/_220dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/latitude_hint"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:autofillHints="90" />
+
+                <EditText
+                    style="@style/SplashScreenTheme"
+                    android:id="@+id/etLongitude"
+                    android:layout_width="@dimen/_220dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/longitude_hint"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:autofillHints="180" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGetCurrentLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="71dp"
+                android:layout_margin="@dimen/_10dp"
+                android:text="@string/current_location" />
+
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/btnGetSunrise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/get_sunrise"/>
+            android:text="@string/get_sunrise" />
+
+        <TextView
+            android:id="@+id/tvCurrentTimeZone"
+            style="@style/SplashScreenTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20dp"
+            android:gravity="center_vertical" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvItems"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

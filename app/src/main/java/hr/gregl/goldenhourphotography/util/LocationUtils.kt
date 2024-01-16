@@ -69,19 +69,18 @@ object LocationUtils {
         }
     }
 
-    private fun getCurrentLocation(context: Context) {
+    fun getCurrentLocation(context: Context) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             == android.content.pm.PackageManager.PERMISSION_GRANTED) {
             val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
             val locationListener = object : LocationListener {
                 override fun onLocationChanged(location: Location) {
-                    // TODO: Remove this log
-                    Log.d("Location", "Latitude: ${location.latitude}, Longitude: ${location.longitude}")
                     LocationData.updateLocation(location.latitude, location.longitude)
                     locationManager.removeUpdates(this)
                 }
 
+                @Deprecated("Deprecated in Java")
                 override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
                 override fun onProviderEnabled(provider: String) {}
                 override fun onProviderDisabled(provider: String) {}
