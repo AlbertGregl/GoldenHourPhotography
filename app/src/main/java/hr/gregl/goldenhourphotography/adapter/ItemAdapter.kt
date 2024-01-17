@@ -71,14 +71,18 @@ class ItemAdapter(
         val isDetailsVisible = detailsVisibilityMap[item._id] ?: false
 
         holder.itemView.setOnLongClickListener {
-            // Remove item from database and list on long click
-            val uri = item._id?.let { ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, it) }
-            uri?.let { context.contentResolver.delete(it, null, null) }
+            // Remove item from database
+            item._id?.let { id ->
+                val uri = ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, id)
+                context.contentResolver.delete(uri, null, null)
+            }
+
+            // Remove item from the list and notify the adapter
             items.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, items.size - position)
             true
         }
-
         holder.bind(item, isDetailsVisible)
     }
 

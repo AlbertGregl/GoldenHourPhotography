@@ -56,9 +56,18 @@ class ItemsFragment : Fragment() {
             handleGetCurrentLocationClick()
         }
 
-        val tvCurrentTimeZone = view.findViewById<TextView>(R.id.tvCurrentTimeZone)
-        tvCurrentTimeZone.text = "Time zone: ${items[0].timezone.substringAfter("/")}"
+        setTimezoneText(view)
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun setTimezoneText(view: View) {
+        val tvCurrentTimeZone = view.findViewById<TextView>(R.id.tvCurrentTimeZone)
+        if (items.isNotEmpty()) {
+            val timeZone = items[0].timezone?.substringAfter("/") ?: "Unknown"
+            tvCurrentTimeZone.text = "Time zone: $timeZone"
+        } else {
+            tvCurrentTimeZone.text = "Time zone: Not available"
+        }
     }
 
     private fun handleGetSunriseClick() {
