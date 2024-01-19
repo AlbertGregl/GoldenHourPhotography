@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import hr.gregl.goldenhourphotography.api.TimeWorker
+import hr.gregl.goldenhourphotography.api.DataWorker
 import hr.gregl.goldenhourphotography.databinding.ActivitySplashScreenBinding
 import hr.gregl.goldenhourphotography.framework.applyAnimation
 import hr.gregl.goldenhourphotography.framework.callDelayed
@@ -84,12 +84,11 @@ import hr.gregl.goldenhourphotography.util.LocationUtils
                 }
             } else {
                 if (isOnline()) {
-
                     WorkManager.getInstance(this).apply {
                         enqueueUniqueWork(
                             DATA_IMPORTED,
                             ExistingWorkPolicy.KEEP,
-                            OneTimeWorkRequest.from(TimeWorker::class.java)
+                            OneTimeWorkRequest.from(DataWorker::class.java)
                         )
                     }
 

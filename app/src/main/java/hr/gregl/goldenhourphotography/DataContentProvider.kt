@@ -13,7 +13,7 @@ import java.lang.IllegalArgumentException
 
 private const val AUTHORITY = "hr.gregl.goldenhourphotography.api.provider"
 private const val PATH = "items"
-val TIME_PROVIDER_CONTENT_URI: Uri = Uri.parse("content://$AUTHORITY/$PATH")
+val DATA_PROVIDER_CONTENT_URI: Uri = Uri.parse("content://$AUTHORITY/$PATH")
 
 private const val ITEMS = 10
 private const val ITEM_ID = 20
@@ -24,7 +24,7 @@ private val URI_MATCHER = with(UriMatcher(UriMatcher.NO_MATCH)) {
     this
 }
 
-class TimeContentProvider : ContentProvider() {
+class DataContentProvider : ContentProvider() {
 
     private lateinit var repository: Repository
 
@@ -52,7 +52,7 @@ class TimeContentProvider : ContentProvider() {
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         val id = repository.insert(values)
-        return ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, id)
+        return ContentUris.withAppendedId(DATA_PROVIDER_CONTENT_URI, id)
     }
 
     override fun onCreate(): Boolean {

@@ -1,4 +1,5 @@
 package hr.gregl.goldenhourphotography.model
+
 data class Item(
     var _id: Long?,
     val date: String,
@@ -12,5 +13,8 @@ data class Item(
     val goldenHour: String,
     val dayLength: String,
     val timezone: String,
-    val utcOffset: Int
+    val utcOffset: Int,
+    val temperature: Double? = -11.1,
+    val weatherIcon: String? = "",
+    val weatherDateTimeText: String? = ""
 )

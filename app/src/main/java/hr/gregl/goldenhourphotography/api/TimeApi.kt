@@ -13,11 +13,6 @@ interface TimeApi {
         @Query("date_start") dateStart: String,
         @Query("date_end") dateEnd: String
     ): Call<ApiResponse>
-    @GET("json")
-    fun fetchItem(
-        @Query("lat") latitude: Double,
-        @Query("lng") longitude: Double
-    ): Call<ApiResponse>
 }
 
 

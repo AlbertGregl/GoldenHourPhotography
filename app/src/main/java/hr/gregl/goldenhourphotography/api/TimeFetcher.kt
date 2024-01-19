@@ -3,7 +3,7 @@ package hr.gregl.goldenhourphotography.api
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
-import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
+import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.TimeReceiver
 import hr.gregl.goldenhourphotography.framework.sendBroadcast
 import hr.gregl.goldenhourphotography.model.Item
@@ -72,7 +72,7 @@ class TimeFetcher(private val context: Context) {
                     put(Item::timezone.name, timeItem.timezone)
                     put(Item::utcOffset.name, timeItem.utcOffset)
                 }
-                context.contentResolver.insert(TIME_PROVIDER_CONTENT_URI, values)
+                context.contentResolver.insert(DATA_PROVIDER_CONTENT_URI, values)
             }
             context.sendBroadcast<TimeReceiver>()
         }

@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.gregl.goldenhourphotography.R
-import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
+import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.model.Item
 
 
@@ -33,6 +33,7 @@ class ItemAdapter(
         private val tvLastLight = itemView.findViewById<TextView>(R.id.tvLastLight)
         private val tvDawn = itemView.findViewById<TextView>(R.id.tvDawn)
         private val tvDusk = itemView.findViewById<TextView>(R.id.tvDusk)
+        private val tvWeatherWidget= itemView.findViewById<TextView>(R.id.tvWeatherWidget)
 
 
         @SuppressLint("SetTextI18n")
@@ -47,6 +48,7 @@ class ItemAdapter(
             tvLastLight.text = "Last light: ${item.lastLight}"
             tvDawn.text = "Dawn: ${item.dawn}"
             tvDusk.text = "Dusk: ${item.dusk}"
+            tvWeatherWidget.text = "Weather: ${item.weatherIcon} ${item.temperature}°C"
 
             itemView.setOnClickListener {
                 additionalDetailsLayout.visibility = if (additionalDetailsLayout.visibility == View.GONE) View.VISIBLE else View.GONE
@@ -73,7 +75,7 @@ class ItemAdapter(
         holder.itemView.setOnLongClickListener {
             // Remove item from database
             item._id?.let { id ->
-                val uri = ContentUris.withAppendedId(TIME_PROVIDER_CONTENT_URI, id)
+                val uri = ContentUris.withAppendedId(DATA_PROVIDER_CONTENT_URI, id)
                 context.contentResolver.delete(uri, null, null)
             }
 

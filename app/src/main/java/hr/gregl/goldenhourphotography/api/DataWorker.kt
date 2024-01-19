@@ -6,13 +6,15 @@ import androidx.work.WorkerParameters
 import hr.gregl.goldenhourphotography.handler.DateHandler
 import hr.gregl.goldenhourphotography.util.LocationData
 
-class TimeWorker(
+class DataWorker(
     private val context: Context,
     workerParams: WorkerParameters
 ) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
         val timeFetcher = TimeFetcher(context)
+        //val weatherFetcher = WeatherFetcher(context)
+
         val dateHandler = DateHandler()
         val (startDate, endDate) = dateHandler.getStartAndEndDates()
 
@@ -20,6 +22,7 @@ class TimeWorker(
         val longitude = LocationData.getLongitude()
 
         timeFetcher.fetchItems(latitude, longitude, startDate, endDate)
+        //weatherFetcher.fetchWeather(latitude, longitude)
 
         return Result.success()
     }

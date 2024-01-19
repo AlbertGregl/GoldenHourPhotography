@@ -35,6 +35,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <TextView
+            android:id="@+id/tvWeatherWidget"
+            android:textColor="?colorOnPrimary"
+            android:textSize="@dimen/_24sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <!-- additional details layout -->
         <LinearLayout
             android:id="@+id/additionalDetailsLayout"

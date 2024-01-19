@@ -12,7 +12,7 @@ import android.os.Looper
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.getSystemService
-import hr.gregl.goldenhourphotography.TIME_PROVIDER_CONTENT_URI
+import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.model.Item
 
 
@@ -61,7 +61,7 @@ fun Context.fetchItems() : MutableList<Item> {
     val items = mutableListOf<Item>()
 
     val cursor = contentResolver.query(
-        TIME_PROVIDER_CONTENT_URI, null, null, null, null
+        DATA_PROVIDER_CONTENT_URI, null, null, null, null
     )
     while (cursor != null && cursor.moveToNext()){
         items.add(
@@ -78,7 +78,10 @@ fun Context.fetchItems() : MutableList<Item> {
                 goldenHour = cursor.getString(cursor.getColumnIndexOrThrow(Item::goldenHour.name)),
                 dayLength = cursor.getString(cursor.getColumnIndexOrThrow(Item::dayLength.name)),
                 timezone = cursor.getString(cursor.getColumnIndexOrThrow(Item::timezone.name)),
-                utcOffset = cursor.getInt(cursor.getColumnIndexOrThrow(Item::utcOffset.name))
+                utcOffset = cursor.getInt(cursor.getColumnIndexOrThrow(Item::utcOffset.name)),
+                temperature = cursor.getDouble(cursor.getColumnIndexOrThrow(Item::temperature.name)),
+                weatherIcon = cursor.getString(cursor.getColumnIndexOrThrow(Item::weatherIcon.name)),
+                weatherDateTimeText = cursor.getString(cursor.getColumnIndexOrThrow(Item::weatherDateTimeText.name))
             )
         )
     }
