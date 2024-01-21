@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import hr.gregl.goldenhourphotography.handler.DateHandler
 import hr.gregl.goldenhourphotography.util.LocationData
 
-class DataWorker(
+class TimeWorker(
     private val context: Context,
     workerParams: WorkerParameters
 ) : Worker(context, workerParams) {

@@ -7,12 +7,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import hr.gregl.goldenhourphotography.R
 import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.model.Item
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 
 class ItemAdapter(
@@ -25,7 +28,8 @@ class ItemAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvDate = itemView.findViewById<TextView>(R.id.tvDate)
         private val tvGoldenHour = itemView.findViewById<TextView>(R.id.tvGoldenHour)
-        private val additionalDetailsLayout = itemView.findViewById<LinearLayout>(R.id.additionalDetailsLayout)
+        private val additionalDetailsLayout =
+            itemView.findViewById<LinearLayout>(R.id.additionalDetailsLayout)
         private val tvTimeZone = itemView.findViewById<TextView>(R.id.tvTimeZone)
         private val tvSunrise = itemView.findViewById<TextView>(R.id.tvSunrise)
         private val tvSunset = itemView.findViewById<TextView>(R.id.tvSunset)
@@ -33,7 +37,8 @@ class ItemAdapter(
         private val tvLastLight = itemView.findViewById<TextView>(R.id.tvLastLight)
         private val tvDawn = itemView.findViewById<TextView>(R.id.tvDawn)
         private val tvDusk = itemView.findViewById<TextView>(R.id.tvDusk)
-        private val tvWeatherWidget= itemView.findViewById<TextView>(R.id.tvWeatherWidget)
+        private val tvWeatherWidget = itemView.findViewById<TextView>(R.id.tvWeatherWidget)
+        private val ivWeatherIcon = itemView.findViewById<ImageView>(R.id.ivWeatherIcon)
 
 
         @SuppressLint("SetTextI18n")
@@ -48,10 +53,19 @@ class ItemAdapter(
             tvLastLight.text = "Last light: ${item.lastLight}"
             tvDawn.text = "Dawn: ${item.dawn}"
             tvDusk.text = "Dusk: ${item.dusk}"
-            tvWeatherWidget.text = "Weather: ${item.weatherIcon} ${item.temperature}°C"
+            tvWeatherWidget.text = "Temperature: ${item.temperature}°C"
+
+            val iconUrl = "https://openweathermap.org/img/wn/${item.weatherIcon}@2x.png"
+            Picasso.get()
+                .load(iconUrl)
+                //.error(R.drawable.weather_icon)
+                //.transform(RoundedCornersTransformation(50, 5))
+                .into(ivWeatherIcon)
+
 
             itemView.setOnClickListener {
-                additionalDetailsLayout.visibility = if (additionalDetailsLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+                additionalDetailsLayout.visibility =
+                    if (additionalDetailsLayout.visibility == View.GONE) View.VISIBLE else View.GONE
             }
         }
 

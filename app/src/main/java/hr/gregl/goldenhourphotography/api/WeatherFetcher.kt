@@ -11,7 +11,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class WeatherFetcher(private val context: Context) {
+class WeatherFetcher(private val context: Context, private val listener: WeatherFetchListener) {
+
     private val weatherApi: WeatherApi
 
     init {
@@ -100,8 +101,14 @@ class WeatherFetcher(private val context: Context) {
                     // TODO Debug log for updated rows
                     Log.d("WeatherUpdate", "Updated rows for $date: $updateCount")
                 }
+
+                listener.onWeatherDataFetched()
             }
 
         })
+    }
+
+    companion object {
+        var weatherDataFetched = false
     }
 }

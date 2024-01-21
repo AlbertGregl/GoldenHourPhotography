@@ -85,7 +85,6 @@ fun Context.fetchItems() : MutableList<Item> {
             )
         )
     }
-    // TODO memory management
-    //cursor?.close()
+    cursor?.close()
     return items
 }

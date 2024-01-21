@@ -1,6 +1,11 @@
 package hr.gregl.goldenhourphotography.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +21,8 @@ import hr.gregl.goldenhourphotography.R
 import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.adapter.ItemAdapter
 import hr.gregl.goldenhourphotography.api.TimeFetcher
+import hr.gregl.goldenhourphotography.api.WeatherFetchListener
+import hr.gregl.goldenhourphotography.api.WeatherFetcher
 import hr.gregl.goldenhourphotography.databinding.FragmentItemsBinding
 import hr.gregl.goldenhourphotography.framework.fetchItems
 import hr.gregl.goldenhourphotography.handler.DateHandler
@@ -29,6 +37,8 @@ class ItemsFragment : Fragment() {
     private lateinit var binding: FragmentItemsBinding
     private lateinit var itemAdapter: ItemAdapter
     private val dateHandler = DateHandler()
+
+    private var weatherDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +67,40 @@ class ItemsFragment : Fragment() {
         }
 
         setTimezoneText(view)
+
+        initWeatherDialog()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (!WeatherFetcher.weatherDataFetched) {
+                showGetWeatherPopup()
+            }
+        }, 1000)
+
+    }
+
+    private fun initWeatherDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        val inflater = requireActivity().layoutInflater
+        val dialogView = inflater.inflate(R.layout.custom_dialog_layout, null)
+        builder.setView(dialogView)
+
+        val messageTextView = dialogView.findViewById<TextView>(R.id.tvMessage)
+        messageTextView.text = getString(R.string.would_you_like_to_fetch_the_latest_weather_data)
+
+        val okButton = dialogView.findViewById<Button>(R.id.btnOk)
+        okButton.setOnClickListener {
+            fetchAndDisplayWeatherData()
+            WeatherFetcher.weatherDataFetched = true
+            weatherDialog?.dismiss()
+        }
+
+        val cancelButton = dialogView.findViewById<Button>(R.id.btnCancel)
+        cancelButton.setOnClickListener {
+            WeatherFetcher.weatherDataFetched = false
+            weatherDialog?.dismiss()
+        }
+
+        weatherDialog = builder.create()
     }
 
     @SuppressLint("SetTextI18n")
@@ -104,19 +148,19 @@ class ItemsFragment : Fragment() {
 
             binding.etLatitude.setText(currentLatitude.toString())
             binding.etLongitude.setText(currentLongitude.toString())
-        }, 1000)
+        }, 500)
     }
+
 
     private fun fetchAndDisplayItems(latitude: Double, longitude: Double) {
         clearOldData()
 
         val (startDate, endDate) = dateHandler.getStartAndEndDates()
+
         TimeFetcher(requireContext()).fetchItems(latitude, longitude, startDate, endDate)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            refreshItems()
-        }, 1000)
     }
+
 
     private fun clearOldData() {
         requireContext().contentResolver.delete(DATA_PROVIDER_CONTENT_URI, null, null)
@@ -125,8 +169,46 @@ class ItemsFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshItems() {
+        items.clear()
         items.addAll(requireContext().fetchItems())
         itemAdapter.notifyDataSetChanged()
+        binding.rvItems.adapter?.notifyDataSetChanged()
+        showGetWeatherPopup()
+    }
+
+
+    private fun showGetWeatherPopup() {
+        weatherDialog?.show()
+    }
+
+    private fun fetchAndDisplayWeatherData() {
+        WeatherFetcher(requireContext(), object : WeatherFetchListener {
+            override fun onWeatherDataFetched() {
+                refreshItems()
+            }
+        }).fetchWeather(
+            LocationData.getLatitude(),
+            LocationData.getLongitude()
+        )
+    }
+
+
+    private val timeUpdateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            refreshItems()
+        }
+    }
+
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    override fun onStart() {
+        super.onStart()
+        val filter = IntentFilter(TimeFetcher.ACTION_DATA_UPDATED)
+        requireContext().registerReceiver(timeUpdateReceiver, filter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        requireContext().unregisterReceiver(timeUpdateReceiver)
     }
 
 }

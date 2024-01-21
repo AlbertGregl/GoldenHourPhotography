@@ -3,6 +3,7 @@ package hr.gregl.goldenhourphotography.api
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.TimeReceiver
 import hr.gregl.goldenhourphotography.framework.sendBroadcast
@@ -10,6 +11,7 @@ import hr.gregl.goldenhourphotography.model.Item
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +19,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TimeFetcher(private val context: Context) {
+
+    companion object {
+        const val ACTION_DATA_UPDATED = "hr.gregl.goldenhourphotography.ACTION_DATA_UPDATED"
+    }
+
 
     private val timeApi: TimeApi
 
@@ -55,7 +62,9 @@ class TimeFetcher(private val context: Context) {
     }
 
     private fun populateItems(timeItems: List<TimeItem>) {
+
         val scope = CoroutineScope(Dispatchers.IO)
+
         scope.launch {
             timeItems.forEach { timeItem ->
                 val values = ContentValues().apply {
@@ -73,8 +82,10 @@ class TimeFetcher(private val context: Context) {
                     put(Item::utcOffset.name, timeItem.utcOffset)
                 }
                 context.contentResolver.insert(DATA_PROVIDER_CONTENT_URI, values)
+
             }
             context.sendBroadcast<TimeReceiver>()
+
         }
     }
 

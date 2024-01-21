@@ -35,15 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/tvWeatherWidget"
-            android:textColor="?colorOnPrimary"
-            android:textSize="@dimen/_24sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/ivWeatherIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20dp"
+            android:tooltipText="@string/some_text"
+            android:contentDescription="@string/weather_icon" />
 
         <!-- additional details layout -->
         <LinearLayout
@@ -111,6 +109,16 @@
                 android:id="@+id/tvDusk"
                 android:textColor="?colorOnPrimary"
                 android:textSize="@dimen/_24sp"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvWeatherWidget"
+                android:textColor="?colorOnPrimary"
+                android:textSize="@dimen/_24sp"
+                android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20dp"
                 android:layout_width="match_parent"

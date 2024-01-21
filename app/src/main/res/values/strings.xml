@@ -36,4 +36,10 @@
     <string name="about_image">About Image</string>
     <string name="api_sunrisesunset"><a href="https://sunrisesunset.io/api/">SunriseSunset.io</a></string>
     <string name="api_link">API link:</string>
+    <string name="custom_message_goes_here">Custom message goes here</string>
+    <string name="would_you_like_to_fetch_the_latest_weather_data">Would you like to fetch the latest weather data?</string>
+    <string name="ok">OK</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="weather_icon">weather icon</string>
+    <string name="some_text">some text</string>
 </resources>
