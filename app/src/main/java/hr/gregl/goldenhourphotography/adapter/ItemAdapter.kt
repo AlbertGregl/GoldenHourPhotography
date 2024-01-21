@@ -11,11 +11,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import hr.gregl.goldenhourphotography.R
 import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
 import hr.gregl.goldenhourphotography.model.Item
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 
 class ItemAdapter(
@@ -42,7 +40,7 @@ class ItemAdapter(
 
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: Item, isDetailsVisible: Boolean) {
+        fun bind(item: Item, isDetailsVisible: Boolean, context: Context) {
             tvDate.text = "Date: ${item.date}"
             tvGoldenHour.text = "Golden hour: ${item.goldenHour}"
             additionalDetailsLayout.visibility = if (isDetailsVisible) View.VISIBLE else View.GONE
@@ -55,13 +53,19 @@ class ItemAdapter(
             tvDusk.text = "Dusk: ${item.dusk}"
             tvWeatherWidget.text = "Temperature: ${item.temperature}°C"
 
-            val iconUrl = "https://openweathermap.org/img/wn/${item.weatherIcon}@2x.png"
-            Picasso.get()
-                .load(iconUrl)
-                //.error(R.drawable.weather_icon)
-                //.transform(RoundedCornersTransformation(50, 5))
-                .into(ivWeatherIcon)
-
+            val iconPath = item.weatherIconPath
+            if (iconPath != null) {
+                val iconResId = context.resources.getIdentifier(
+                    iconPath, null, context.packageName
+                )
+                if (iconResId != 0) { // Resource exists
+                    ivWeatherIcon.setImageResource(iconResId)
+                } else { // Default icon if resource not found
+                    ivWeatherIcon.setImageResource(R.drawable.weather_empty)
+                }
+            } else {
+                ivWeatherIcon.setImageResource(R.drawable.weather_empty)
+            }
 
             itemView.setOnClickListener {
                 additionalDetailsLayout.visibility =
@@ -99,7 +103,7 @@ class ItemAdapter(
             notifyItemRangeChanged(position, items.size - position)
             true
         }
-        holder.bind(item, isDetailsVisible)
+        holder.bind(item, isDetailsVisible, context)
     }
 
     override fun onViewDetachedFromWindow(holder: ViewHolder) {

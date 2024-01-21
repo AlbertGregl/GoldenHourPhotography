@@ -25,7 +25,7 @@ private val CREATE_TABLE = "CREATE TABLE $TABLE_NAME (\n" +
         "${Item::timezone.name} TEXT NOT NULL,\n" +
         "${Item::utcOffset.name} INTEGER NOT NULL, \n" +
         "${Item::temperature.name} REAL,\n" +
-        "${Item::weatherIcon.name} TEXT,\n" +
+        "${Item::weatherIconPath.name} TEXT,\n" +
         "${Item::weatherDateTimeText.name} TEXT\n" +
         ")"
 private const val DROP_TABLE = "DROP TABLE IF EXISTS $TABLE_NAME"

@@ -65,4 +65,8 @@ dependencies {
     // picasso
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("jp.wasabeef:picasso-transformations:2.4.0")
+
+    // coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+
 }

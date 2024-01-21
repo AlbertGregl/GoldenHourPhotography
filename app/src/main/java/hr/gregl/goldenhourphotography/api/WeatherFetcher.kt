@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.util.Log
 import hr.gregl.goldenhourphotography.DATA_PROVIDER_CONTENT_URI
+import hr.gregl.goldenhourphotography.handler.downloadAndStoreIcon
 import hr.gregl.goldenhourphotography.model.Item
 import retrofit2.Call
 import retrofit2.Callback
@@ -79,11 +80,22 @@ class WeatherFetcher(private val context: Context, private val listener: Weather
                     } ?: dataList.first()
 
                     // TODO Debug log for relevant data
-                    Log.d("WeatherUpdate", "Updating Date: $date, Data of date: ${relevantData.dateTimeText}")
+                    Log.d(
+                        "WeatherUpdate",
+                        "Updating Date: $date, Data of date: ${relevantData.dateTimeText}"
+                    )
+
+
+                    // match the icon code to the icon path in drawable
+                    // for example, icon code 01d matches icon path _01d
+
+
+                    val iconCode = relevantData.weather.firstOrNull()?.icon
+                    val iconPath = "drawable/_$iconCode"
 
                     val values = ContentValues().apply {
                         put("temperature", relevantData.main.temp)
-                        put("weatherIcon", relevantData.weather.firstOrNull()?.icon)
+                        put("weatherIconPath", iconPath ?: "")
                         put("weatherDateTimeText", relevantData.dateTimeText)
                     }
 

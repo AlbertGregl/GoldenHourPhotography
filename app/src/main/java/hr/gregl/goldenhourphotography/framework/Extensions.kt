@@ -80,7 +80,7 @@ fun Context.fetchItems() : MutableList<Item> {
                 timezone = cursor.getString(cursor.getColumnIndexOrThrow(Item::timezone.name)),
                 utcOffset = cursor.getInt(cursor.getColumnIndexOrThrow(Item::utcOffset.name)),
                 temperature = cursor.getDouble(cursor.getColumnIndexOrThrow(Item::temperature.name)),
-                weatherIcon = cursor.getString(cursor.getColumnIndexOrThrow(Item::weatherIcon.name)),
+                weatherIconPath = cursor.getString(cursor.getColumnIndexOrThrow(Item::weatherIconPath.name)),
                 weatherDateTimeText = cursor.getString(cursor.getColumnIndexOrThrow(Item::weatherDateTimeText.name))
             )
         )

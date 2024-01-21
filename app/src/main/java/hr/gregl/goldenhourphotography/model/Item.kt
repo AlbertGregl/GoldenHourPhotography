@@ -14,7 +14,7 @@ data class Item(
     val dayLength: String,
     val timezone: String,
     val utcOffset: Int,
-    val temperature: Double? = -11.1,
-    val weatherIcon: String? = "",
-    val weatherDateTimeText: String? = ""
+    val temperature: Double?,
+    val weatherIconPath: String?,
+    val weatherDateTimeText: String?
 )
