@@ -22,31 +22,41 @@
                 android:orientation="vertical">
 
                 <EditText
-                    style="@style/SplashScreenTheme"
                     android:id="@+id/etLatitude"
-                    android:layout_width="@dimen/_220dp"
+                    style="@style/SplashScreenTheme"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:autofillHints="90"
                     android:hint="@string/latitude_hint"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:autofillHints="90" />
+                    android:inputType="numberDecimal|numberSigned" />
 
                 <EditText
-                    style="@style/SplashScreenTheme"
                     android:id="@+id/etLongitude"
-                    android:layout_width="@dimen/_220dp"
+                    style="@style/SplashScreenTheme"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:autofillHints="180"
                     android:hint="@string/longitude_hint"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:autofillHints="180" />
+                    android:inputType="numberDecimal|numberSigned" />
+
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnGetCurrentLocation"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="71dp"
-                android:layout_margin="@dimen/_10dp"
-                android:text="@string/current_location" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGetCurrentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_71dp"
+                    android:layout_margin="@dimen/_10dp"
+                    android:text="@string/current_location" />
+
+
+            </LinearLayout>
+
 
 
         </LinearLayout>

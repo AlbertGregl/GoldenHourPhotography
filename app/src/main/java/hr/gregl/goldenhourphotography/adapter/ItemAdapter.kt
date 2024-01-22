@@ -53,23 +53,36 @@ class ItemAdapter(
             tvDusk.text = "Dusk: ${item.dusk}"
             tvWeatherWidget.text = "Temperature: ${item.temperature}°C"
 
-            val iconPath = item.weatherIconPath
-            if (iconPath != null) {
-                val iconResId = context.resources.getIdentifier(
-                    iconPath, null, context.packageName
-                )
-                if (iconResId != 0) { // Resource exists
-                    ivWeatherIcon.setImageResource(iconResId)
-                } else { // Default icon if resource not found
-                    ivWeatherIcon.setImageResource(R.drawable.weather_empty)
-                }
-            } else {
-                ivWeatherIcon.setImageResource(R.drawable.weather_empty)
-            }
+            val iconResId = getWeatherIconResource(item.weatherIconPath)
+            ivWeatherIcon.setImageResource(iconResId)
 
             itemView.setOnClickListener {
                 additionalDetailsLayout.visibility =
                     if (additionalDetailsLayout.visibility == View.GONE) View.VISIBLE else View.GONE
+            }
+        }
+
+        private fun getWeatherIconResource(iconCode: String?): Int {
+            return when (iconCode) {
+                "01d" -> R.drawable._01d
+                "01n" -> R.drawable._01n
+                "02d" -> R.drawable._02d
+                "02n" -> R.drawable._02n
+                "03d" -> R.drawable._03d
+                "03n" -> R.drawable._03n
+                "04d" -> R.drawable._04d
+                "04n" -> R.drawable._04n
+                "09d" -> R.drawable._09d
+                "09n" -> R.drawable._09n
+                "10d" -> R.drawable._10d
+                "10n" -> R.drawable._10n
+                "11d" -> R.drawable._11d
+                "11n" -> R.drawable._11n
+                "13d" -> R.drawable._13d
+                "13n" -> R.drawable._13n
+                "50d" -> R.drawable._50d
+                "50n" -> R.drawable._50n
+                else -> R.drawable.weather_empty
             }
         }
 
@@ -113,4 +126,5 @@ class ItemAdapter(
             detailsVisibilityMap[it] = holder.isDetailsVisible()
         }
     }
+
 }

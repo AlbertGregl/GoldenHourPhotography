@@ -47,6 +47,7 @@ class ItemsFragment : Fragment() {
         items = requireContext().fetchItems()
         binding = FragmentItemsBinding.inflate(inflater, container, false)
         itemAdapter = ItemAdapter(requireContext(), items)
+        initWeatherDialog()
         return binding.root
     }
 
@@ -68,12 +69,8 @@ class ItemsFragment : Fragment() {
 
         setTimezoneText(view)
 
-        initWeatherDialog()
-
         Handler(Looper.getMainLooper()).postDelayed({
-            if (!WeatherFetcher.weatherDataFetched) {
-                showGetWeatherPopup()
-            }
+            showGetWeatherPopup()
         }, 1000)
 
     }
@@ -90,13 +87,11 @@ class ItemsFragment : Fragment() {
         val okButton = dialogView.findViewById<Button>(R.id.btnOk)
         okButton.setOnClickListener {
             fetchAndDisplayWeatherData()
-            WeatherFetcher.weatherDataFetched = true
             weatherDialog?.dismiss()
         }
 
         val cancelButton = dialogView.findViewById<Button>(R.id.btnCancel)
         cancelButton.setOnClickListener {
-            WeatherFetcher.weatherDataFetched = false
             weatherDialog?.dismiss()
         }
 
@@ -117,8 +112,12 @@ class ItemsFragment : Fragment() {
     private fun handleGetSunriseClick() {
         val latitude = binding.etLatitude.text.toString().toDoubleOrNull()
         val longitude = binding.etLongitude.text.toString().toDoubleOrNull()
+
+        LocationData.setLatitude(latitude)
+        LocationData.setLongitude(longitude)
+
         if (latitude != null && longitude != null) {
-            fetchAndDisplayItems(latitude, longitude)
+            fetchAndDisplayItems(latitude = latitude, longitude = longitude)
         } else {
             Toast.makeText(
                 requireContext(),
@@ -159,6 +158,7 @@ class ItemsFragment : Fragment() {
 
         TimeFetcher(requireContext()).fetchItems(latitude, longitude, startDate, endDate)
 
+        refreshItems()
     }
 
 
@@ -173,7 +173,6 @@ class ItemsFragment : Fragment() {
         items.addAll(requireContext().fetchItems())
         itemAdapter.notifyDataSetChanged()
         binding.rvItems.adapter?.notifyDataSetChanged()
-        showGetWeatherPopup()
     }
 
 

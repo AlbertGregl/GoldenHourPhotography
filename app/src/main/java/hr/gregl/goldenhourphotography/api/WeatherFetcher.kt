@@ -85,17 +85,12 @@ class WeatherFetcher(private val context: Context, private val listener: Weather
                         "Updating Date: $date, Data of date: ${relevantData.dateTimeText}"
                     )
 
-
-                    // match the icon code to the icon path in drawable
-                    // for example, icon code 01d matches icon path _01d
-
-
                     val iconCode = relevantData.weather.firstOrNull()?.icon
-                    val iconPath = "drawable/_$iconCode"
+                    //val iconPath = "drawable/_$iconCode"
 
                     val values = ContentValues().apply {
                         put("temperature", relevantData.main.temp)
-                        put("weatherIconPath", iconPath ?: "")
+                        put("weatherIconPath", iconCode ?: "")
                         put("weatherDateTimeText", relevantData.dateTimeText)
                     }
 
@@ -120,7 +115,7 @@ class WeatherFetcher(private val context: Context, private val listener: Weather
         })
     }
 
-    companion object {
+/*    companion object {
         var weatherDataFetched = false
-    }
+    }*/
 }

@@ -12,6 +12,7 @@ interface WeatherApi {
     fun fetchWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
+        @Query("units") units: String = "metric",
         @Query("appid") apiKey: String = WEATHER_API_KEY
     ): Call<WeatherResponse>
 }

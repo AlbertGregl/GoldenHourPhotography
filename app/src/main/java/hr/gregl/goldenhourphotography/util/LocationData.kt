@@ -20,4 +20,12 @@ object LocationData {
     fun getLongitude(): Double {
         return longitude ?: defaultLongitude
     }
+
+    fun setLatitude(latitude: Double?) {
+        this.latitude = latitude
+    }
+
+    fun setLongitude(longitude: Double?) {
+        this.longitude = longitude
+    }
 }
